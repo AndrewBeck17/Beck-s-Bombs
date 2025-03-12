@@ -1,2 +1,2 @@
-# Beck-s-Bombs
+# Becks-Bombs
 Particle Project
