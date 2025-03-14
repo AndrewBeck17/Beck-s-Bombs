@@ -9,5 +9,4 @@
 - (If I'm not lazy) Steve walks onto screen and if hit by explosion, his block model will gain upward and outward velocity, disappearing after a few seconds.
 ## Jacob Peredia
 - Not quite sure just yet will get more direction on what to work on from group
-1. etc
-2. etc
+
