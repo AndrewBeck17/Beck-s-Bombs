@@ -1,5 +1,4 @@
 # Becks-Bombs
-## header 2
 ## Andrew Beck
 - Nuclear Bomb Explosion
 - Bomb falls from the top of the screen, and once it hits the bottom, particles shoot out in every direction above the surface.
