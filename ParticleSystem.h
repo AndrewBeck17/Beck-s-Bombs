@@ -12,7 +12,7 @@ class ParticleSystem {
 		~ParticleSystem();
 
 		void add(Particle particle) {
-			LL* newParticle = new LL(particle);
+			LL* newParticle = new LL(particle); //not working
 			if (tail != nullptr) {
 				tail->set_next(newParticle);
 			}
