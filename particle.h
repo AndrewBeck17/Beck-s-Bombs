@@ -1,5 +1,5 @@
 #include <iostream>
-
+//fixed some typos
 enum class MovementType { STREAMER, BALLISTIC, FIREWORK }; //pre-selected movement types
 
 struct Particle {
