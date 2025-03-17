@@ -3,7 +3,7 @@
 - Nuclear Bomb Explosion
 - Bomb falls from the top of the screen, and once it hits the bottom, particles shoot out in every direction above the surface.
 - Already built buildings will get destroyed by the bomb particles
-  1. Milestone #1: B
+  1. particle.h
 ## Tenji Vang
 - Minecraft creeper explosion effect
 - Creeper (green block) walks on screen then explodes after a period of time, shooting out explosion particles.
