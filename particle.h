@@ -5,7 +5,7 @@ enum class MovementType { STREAMER, BALLISTIC, FIREWORK }; //pre-selected moveme
 struct Particle {
 	//member variables
 	double px, py; //position
-	double vx, vy  //velocity
+	double vx, vy;  //velocity
 	int lifetime;  //lifetime (# of frames)
 	MovementType type;  //type of movement
 
