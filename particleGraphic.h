@@ -12,8 +12,6 @@
 
 //Andrew Beck
 
-#ifndef
-#include "die.h"
 #include "/public/colors.h"
 
 class ParticleGraphics {
@@ -23,7 +21,8 @@ class ParticleGraphics {
 	public:
 		//constructor
 		ParticleGraphics(int new_r, int new_g, int new_b) : r(new_r), g(new_g), b(new_g) {
-			if (new_r < 0 || new_g < 0 || new_b < 0) die();
+			if (new_r < 0 || new_g < 0 || new_b < 0) //die();
+			if (new_r > 255 || new_g > 255 || new_b > 255) //die();
 		}
 
 		//get red green or blue values
@@ -39,15 +38,18 @@ class ParticleGraphics {
 
 		//set red green or blue values
 		void set_r (int new_r) {
-			if (new_r < 0) die();
+			if (new_r < 0) //die();
+			else if (new_r > 255) //die();
 			else r = new_r;
 		}
 		void set_g (int new_g) {
-			if (new_g < 0) die();
+			if (new_g < 0) //die();
+			else if (new_g > 255) //die();
 			else g = new_g;
 		}
 		void set_b (int new_b) {
-			if (new_b < 0) die();
+			if (new_b < 0) //die();
+			else if (new_b > 255) //die();
 			else b = new_b;
 		}
 
