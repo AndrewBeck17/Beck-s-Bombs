@@ -1,30 +1,85 @@
 #include "particle.h"
-#include "ll.h"
+#include "cell.h"
+#include "/public/colors.h"
+#include <iostream>
+using namespace std;
 
 class ParticleSystem {
-	private:
-		int width = 0;
-		int height = 0;
-		int amount = 0;
+private:
+    cell* head;
+    cell* tail;
 
-	public:
-		ParticleSystem();
-		~ParticleSystem();
+public:
+    int FPS = 60;
+    int amount = 0;
+    ParticleSystem() : head(nullptr), tail(nullptr) {}
+    ~ParticleSystem() {
+        cell* temp = head;
+        while (head != nullptr) {
+            temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
 
-		void add(Particle particle) {
-			LL* newParticle = new LL(particle); //not working
-			if (tail != nullptr) {
-				tail->set_next(newParticle);
-			}
-			tail = newParticle;
-			if (head == nullptr) {
-				head = newParticle;
-			}
-		}	
-		int numParticles() const {
-			return amount;
-		}
-		void drawParticles() const;
-		void moveParticles();
+    void add(Particle particle) {
+        cell* newcell = new cell(particle);
+        if (!head) {
+            head = tail = newcell;
+        }
+        else {
+            tail->next = newcell;
+            newcell->prev = tail;
+            tail = newcell;
+        }
+        amount++;
+    }
+
+    void moveParticles(Particle p) {
+        cell* curr = head;
+        string str = "O";
+        int i = 0;
+        auto [rows,cols] = get_terminal_size();
+        if (p.type == MovementType::STREAMER) {
+ 			for (i = 0; i < p.lifetime; i++) {
+                p.px = p.px + p.vx;
+                p.py = p.py + p.vy;
+
+                if (p.px < 0) {
+                    head = curr->next;
+                    delete curr;
+                    break;
+                }
+                if (p.py < 0) {
+                    head = curr->next;
+                    delete curr;
+                    break;
+                }
+                if (p.px >= cols) {
+                    head = curr->next;
+                    delete curr;
+                    break;
+                }
+                if (p.py >= rows) {
+                    head = curr->next;
+                    delete curr;
+                    break;
+                }
+                movecursor(p.py, p.px);
+                setbgcolor(7, 24, 86);
+                setcolor(255, 0, 0);
+                cout << str;
+                cout.flush();
+                resetcolor();
+                usleep(1'000'000 / FPS);
+                clearscreen();
+
+            }
+        }
+    }
+
+    int numParticles() {
+        return amount;
+    }
 
 };
