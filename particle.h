@@ -1,54 +1,57 @@
+#pragma once
 //Part 2
 /*B) Particle class person needs to implement the physics method such that
-  when moveParticles (or whatever you want to call it) is called, it will update 
-  the position of the particle based on its velocity. You can also add 
+  when moveParticles (or whatever you want to call it) is called, it will update
+  the position of the particle based on its velocity. You can also add
   acceleration changing velocity or gravity if you want. */
 
-//ANDREW BECK
+//ANDREW BEC
 #include <iostream>
 //fixed some typos
-enum class MovementType { STREAMER, BALLISTIC, FIREWORK }; //pre-selected movement types
+enum class MovementType { STREAMER, BALLISTIC, FIREWORK };
 
 struct Particle {
-	//member variables
-	double px, py; //position
-	double vx, vy;  //velocity
-	int lifetime;  //lifetime (# of frames)
-	MovementType type;  //type of movement
+    //member variables
+    double x, y; //position
+    double dx, dy; //velocity
+    int lifetime; //lifetime (# of frames)
+    MovementType type; //type of movement
 
-	//6 parameter constructor
-	Particle (double px, double py, double vx, double vy, int lifetime, MovementType type) : px(px), py(py), vx(vx), vy(vy), lifetime(lifetime), type(type) { 
-		if (px < 0) exit(EXIT_FAILURE);
-		if (py < 0) exit(EXIT_FAILURE);
-		if (lifetime < 0) exit(EXIT_FAILURE);
-	}
+    //6 parameter constructor
+    Particle(double new_x, double new_y, double new_dx, double new_dy, int new_lifetime, MovementType new_type): x(new_x), y(new_y), dx(new_dx), dy(new_dy), lifetime(new_lifetime), type(new_type){
+        if (x < 0) exit(EXIT_FAILURE);
+        if (y < 0) exit(EXIT_FAILURE);
+        if (lifetime < 0) exit(EXIT_FAILURE);
+    }
 
-	//updates position per unit lifetime according to particle type {STREAMER, BALLISTIC, FIREWORK}
-	void physics (MovementType type) {
-		switch(type) {
-			case MovementType::STREAMER:
-				px = px + vx; //updates poisition every frame at velocity x
-				py = py + vy;
-				break;
-			case MovementType::BALLISTIC:
-				px = px + vx;
-				py = py + vy;
-				vy = vy - 1; //y velocity increases by -1 every frame to simulate gravitational acceleration
-				break;
-			case MovementType::FIREWORK:
-				px = px + vx;
-				py = py + vy;
-				if (lifetime == 0) {
-					explode(); //same as STREAMER but at lifetime 0 it explodies into multiple streamers
-				}
-				break;
-		}
-		lifetime--;
-	}
+    //updates position per unit lifetime to particle type {STREAMER, BALLISTIC, FIREWORK}
+    void physics (MovementType type) {
+        switch(type) {
+            case MovementType::STREAMER:
+                x = x + dx;
+                y = y + dy;
+                break;
+            case MovementType::BALLISTIC:
+                x = x + dx;
+                y = y + dy;
+                dy = dy - 1;
+                break;
+            case MovementType::FIREWORK:
+                x = x + dx;
+                y = y + dy;
+                if (lifetime == 0) {
+                    explode();
+                }
+                break;
+        }
+        lifetime--;
+    }
 
-	//stubbed out draw function...
-	void draw(); 
+    //stubbed out draw function
+    void draw();
 
-	//stubbed out explode function...
-	void explode();
+    //stubbed out explode function
+    void explode();
+
 };
+
