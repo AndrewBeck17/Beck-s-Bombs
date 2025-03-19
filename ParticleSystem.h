@@ -1,85 +1,110 @@
+#include <iostream>
 #include "particle.h"
 #include "cell.h"
 #include "/public/colors.h"
-#include <iostream>
 using namespace std;
-
 class ParticleSystem {
-private:
-    cell* head;
-    cell* tail;
-
-public:
-    int FPS = 60;
-    int amount = 0;
-    ParticleSystem() : head(nullptr), tail(nullptr) {}
-    ~ParticleSystem() {
-        cell* temp = head;
-        while (head != nullptr) {
-            temp = head;
-            head = head->next;
-            delete temp;
+    private:
+        Cell* head;
+    public:
+        ParticleSystem() : head(nullptr) {}
+        ~ParticleSystem() {
+        Cell* curr = head;
+        while (curr != nullptr) {
+            Cell* next = curr->next;
+            delete curr;
+            curr = next;
         }
     }
-
-    void add(Particle particle) {
-        cell* newcell = new cell(particle);
-        if (!head) {
-            head = tail = newcell;
+        void addParticle(const Particle& particle) {
+            Cell* newP = new Cell(particle);
+            newP->next = head;
+            head = newP;
         }
-        else {
-            tail->next = newcell;
-            newcell->prev = tail;
-            tail = newcell;
-        }
-        amount++;
-    }
 
-    void moveParticles(Particle p) {
-        cell* curr = head;
-        string str = "O";
-        int i = 0;
-        auto [rows,cols] = get_terminal_size();
-        if (p.type == MovementType::STREAMER) {
- 			for (i = 0; i < p.lifetime; i++) {
-                p.px = p.px + p.vx;
-                p.py = p.py + p.vy;
+        void updateDrawParticle() {
+            Cell* curr = head;
+            Cell* prev = nullptr;
+            while (curr != nullptr) {
+                auto [rows,cols] = get_terminal_size();
+                curr->particle.x += curr->particle.dx;
+                curr->particle.y += curr->particle.dy;
+                curr->particle.lifetime--;
 
-                if (p.px < 0) {
-                    head = curr->next;
-                    delete curr;
-                    break;
+                if (curr->particle.x < 0) {
+                    Cell* temp = curr;
+                    curr = curr->next;
+                    if (prev != nullptr) {
+                        prev->next = curr;
+                    }
+                    else {
+                        head = curr;
+                    }
+                    delete temp;
                 }
-                if (p.py < 0) {
-                    head = curr->next;
-                    delete curr;
-                    break;
+                else if (curr->particle.y < 0) {
+                    Cell* temp = curr;
+                    curr = curr->next;
+                    if (prev != nullptr) {
+                        prev->next = curr;
+                    }
+                    else {
+                        head = curr;
+                    }
+                    delete temp;
+                } 
+                else if (curr->particle.x >= cols) {
+                    Cell* temp = curr;
+                    curr = curr->next;
+                    if (prev != nullptr) {
+                        prev->next = curr;
+                    }
+                    else {
+                        head = curr;
+                    }
+                    delete temp;
                 }
-                if (p.px >= cols) {
-                    head = curr->next;
-                    delete curr;
-                    break;
+                else if (curr->particle.y >= rows) {
+                    Cell* temp = curr;
+                    curr = curr->next;
+                    if (prev != nullptr) {
+                        prev->next = curr;
+                    }
+                    else {
+                        head = curr;
+                    }
+                    delete temp;
                 }
-                if (p.py >= rows) {
-                    head = curr->next;
-                    delete curr;
-                    break;
+
+                else if (curr->particle.lifetime <= 0) {
+                    Cell* temp = curr;
+                    if (prev != nullptr) {
+                        prev->next = curr->next;
+                    }
+                    else {
+                        head = curr->next;
+                    }
+                    curr = curr->next;
+                    delete temp;
                 }
-                movecursor(p.py, p.px);
-                setbgcolor(7, 24, 86);
-                setcolor(255, 0, 0);
-                cout << str;
-                cout.flush();
-                resetcolor();
-                usleep(1'000'000 / FPS);
-                clearscreen();
+                else {
+                    prev = curr;
+                    curr = curr->next;
+                }
 
             }
         }
-    }
 
-    int numParticles() {
-        return amount;
-    }
-
+        void drawParticles() {
+            Cell* curr = head;
+            while (curr != nullptr) {
+                movecursor(curr->particle.y, curr->particle.x);
+                cout << "O";
+                cout.flush();
+                usleep(1'000'000 / 120);
+                if (curr->next == nullptr) clearscreen();
+                curr = curr->next;
+            }
+        }
 };
+
