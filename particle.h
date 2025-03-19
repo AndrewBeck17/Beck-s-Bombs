@@ -1,3 +1,9 @@
+//Part 2
+/*B) Particle class person needs to implement the physics method such that
+  when moveParticles (or whatever you want to call it) is called, it will update 
+  the position of the particle based on its velocity. You can also add 
+  acceleration changing velocity or gravity if you want. */
+
 //ANDREW BECK
 #include <iostream>
 //fixed some typos
@@ -18,7 +24,7 @@ struct Particle {
 	}
 
 	//updates position per unit lifetime according to particle type {STREAMER, BALLISTIC, FIREWORK}
-	void physics () {
+	void physics (MovementType type) {
 		switch(type) {
 			case MovementType::STREAMER:
 				px = px + vx; //updates poisition every frame at velocity x
