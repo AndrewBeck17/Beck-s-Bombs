@@ -1,4 +1,3 @@
-#pragma once
 //Part 2
 /*B) Particle class person needs to implement the physics method such that
   when moveParticles (or whatever you want to call it) is called, it will update
@@ -6,7 +5,11 @@
   acceleration changing velocity or gravity if you want. */
 
 //ANDREW BECK
+#ifndef
+#include "/public/colors.h"
+#include "particleGraphics"
 #include <iostream>
+
 //fixed some typos
 enum class MovementType { STREAMER, BALLISTIC, FIREWORK };
 
@@ -25,7 +28,7 @@ struct Particle {
     }
 
     //updates position per unit lifetime to particle type {STREAMER, BALLISTIC, FIREWORK}
-    void physics (MovementType type) {
+    void physics () {
         switch(type) {
             case MovementType::STREAMER:
                 x = x + dx;
@@ -40,7 +43,7 @@ struct Particle {
                 x = x + dx;
                 y = y + dy;
                 if (lifetime == 0) {
-                    explode();
+                   explode();
                 }
                 break;
         }
@@ -48,10 +51,14 @@ struct Particle {
     }
 
     //stubbed out draw function
-    void draw();
+    void draw() {
+		
+	}
 
     //stubbed out explode function
-    void explode();
+    void explode(Particle one, Particle two, Particle three, Particle four, Particle five) {
+		
+	}
 
 };
 

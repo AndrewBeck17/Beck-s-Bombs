@@ -14,6 +14,12 @@
 
 #include "/public/colors.h"
 
+/*
+void die (const string &s = "BAD INPUT!") {
+	return s;
+}
+   */
+
 void die() {
 	exit(EXIT_FAILURE);
 }
@@ -57,20 +63,27 @@ class ParticleGraphics {
 			else b = new_b;
 		}
 
-		//draws point of (size row * size col)
-		void drawPoint(int row, int col) {
-			for (int i = 0; i < col; i++) {
-				if (i > 0) std::cout << std::endl;
-				for (int k = 0; k < row; k++) {
-					setbgcolor(r,g,b);
-					std::cout << " ";
+		//draws point at location (x, y) with value (point)
+		void drawPoint(int x, int y, char point) {
+			movecursor(y,x);
+			setbgcolor(r,g,b);
+			std::cout << point;
+			resetcolor();
+		}
+
+		//draws rectangle of size (x * y) starting at position (x, y) : top corner
+		void drawRectangle(int start_x, int start_y, int x_size, int y_size, char point) {
+			movecursor(start_y, start_x);
+			setbgcolor(r,g,b);
+			for (int i = 0; i < y_size; i++) {
+				if (i > 0) movecursor(start_y - i, start_x);
+				for (int k = 0; k < x_size; k++) {
+					std::cout << point;
 				}
 			}
 			resetcolor();
 		}
 
-		//stubbed out...
-		void drawRectangle();
 		void drawOval();
 		void drawPolygon();
 		void drawLine();
