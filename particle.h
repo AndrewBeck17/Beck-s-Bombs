@@ -1,3 +1,4 @@
+//ANDREW BECK
 #include <iostream>
 //fixed some typos
 enum class MovementType { STREAMER, BALLISTIC, FIREWORK }; //pre-selected movement types
@@ -17,7 +18,7 @@ struct Particle {
 	}
 
 	//updates position per unit lifetime according to particle type {STREAMER, BALLISTIC, FIREWORK}
-	void movement () {
+	void physics () {
 		switch(type) {
 			case MovementType::STREAMER:
 				px = px + vx; //updates poisition every frame at velocity x
