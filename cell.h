@@ -1,8 +1,6 @@
 #pragma once
-struct cell {
+struct Cell {
 	Particle particle;
-	cell* next = nullptr;
-	cell* prev = nullptr;
-
-	cell(Particle particle) : particle(particle), next(nullptr), prev(nullptr) {}
+	Cell* next = nullptr;
+	Cell(const Particle& particle) : particle(particle), next(nullptr) {}
 };
