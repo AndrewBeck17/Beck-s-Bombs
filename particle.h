@@ -5,7 +5,7 @@
   the position of the particle based on its velocity. You can also add
   acceleration changing velocity or gravity if you want. */
 
-//ANDREW BEC
+//ANDREW BECK
 #include <iostream>
 //fixed some typos
 enum class MovementType { STREAMER, BALLISTIC, FIREWORK };
