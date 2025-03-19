@@ -5,9 +5,16 @@
   a polygon, and a line. The constructor/getter/setter should 
   be written now, the other methods should be stubbed out. */
 
+//Part 2
+/*D) ParticleGraphics needs to have drawPoint(int row, int col)
+  implemented so that it will draw a colored block at that point on the screen. 
+  Look at the demo code in /public/particle_demo for how to draw a point.*/
+
 //Andrew Beck
 
+#ifndef
 #include "die.h"
+#include "/public/colors.h"
 
 class ParticleGraphics {
 	private:
@@ -44,8 +51,18 @@ class ParticleGraphics {
 			else b = new_b;
 		}
 
+		//draws point of (size row * size col)
+		void drawPoint(int row, int col) {
+			for (int i = 0; i < col; i++) {
+				if (i > 0) std::cout << std::endl;
+				for (int k = 0; k < row; k++) {
+					setbgcolor(r,g,b);
+					std::cout << " ";
+				}
+			}
+		}
+
 		//stubbed out...
-		void drawPoint();
 		void drawRectangle();
 		void drawOval();
 		void drawPolygon();
