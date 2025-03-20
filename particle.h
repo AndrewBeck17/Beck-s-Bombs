@@ -5,9 +5,9 @@
   acceleration changing velocity or gravity if you want. */
 
 //ANDREW BECK
-#ifndef
+#pragma once
 #include "/public/colors.h"
-#include "particleGraphics"
+#include "particleGraphic.h"
 #include <iostream>
 
 //fixed some typos
@@ -28,7 +28,7 @@ struct Particle {
     }
 
     //updates position per unit lifetime to particle type {STREAMER, BALLISTIC, FIREWORK}
-    void physics () {
+    void physics(MovementType type) {
         switch(type) {
             case MovementType::STREAMER:
                 x = x + dx;
@@ -43,7 +43,7 @@ struct Particle {
                 x = x + dx;
                 y = y + dy;
                 if (lifetime == 0) {
-                   explode();
+					explode();
                 }
                 break;
         }
@@ -56,9 +56,9 @@ struct Particle {
 	}
 
     //stubbed out explode function
-    void explode(Particle one, Particle two, Particle three, Particle four, Particle five) {
-		
-	}
+    /*void explode(Particle one, Particle two, Particle three, Particle four, Particle five) {
+	}*/
+	void explode(){}
+	
 
 };
-
