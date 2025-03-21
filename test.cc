@@ -23,6 +23,8 @@ int main() {
 
 using namespace std;
 
+//PHYSICS AND DRAW WORKS
+/*
 int main() {
 	Particle point(5, 5, 1, 1, 100, MovementType::STREAMER);
 	for (int i = 0; i < point.lifetime; i++) {
@@ -31,4 +33,4 @@ int main() {
 	}
 	return 0;
 }
-
+*/

@@ -1,4 +1,7 @@
 #pragma once
+#include "particle.h"
+
+
 struct Cell {
 	Particle particle;
 	Cell* next = nullptr;

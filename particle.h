@@ -8,7 +8,11 @@
 #pragma once
 #include "/public/colors.h"
 #include "particleGraphic.h"
+#include "ParticleSystem.h"
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <cmath>
 
 //fixed some typos
 enum class MovementType { STREAMER, BALLISTIC, FIREWORK };
@@ -50,14 +54,34 @@ struct Particle {
         lifetime--;
     }
 
-    //stubbed out draw function
+    //draws point at location (x,y) with color (r,g,b) and a char (looks)
     void draw(int r, int g, int b, char look) {
 		ParticleGraphics point(r,g,b);
 		point.drawPoint(x,y,look);
 	}
 
     //stubbed out explode function
-	void explode(){}
+	void explode(){
+		if (MovementType != MovementType::FIREWORK || lifetime > 0) { //safeguard
+			return 
+		}
+		srand(time(0));
+		int numParticles = 15 + (rand() % 15); //generates between 15 - 30 new particles in explosion
+		int velocity = (rand() % 2) + 4; //chooses generalized velocity for both x and y direction
+		double angle_per = numParticles / 360; //angle between each particle around eplosion radius
+		double accumulated_angle = 0; //tracks how far around circle we have been
+		for (int i = 0; i < numParticles; i++) {
+			//uses trig functions to choose direction of particle
+			static_cast<int> new_dx = std::round(cos(angle_per + accumulated_angle) * velocity);
+			static_cast<int> new_dy = std::round(sin(angle_per + accumulated_angle) * velocity);
+
+			accumulated_angle += angle_per; //adds to accumulated
+
+			//creates new particle for explosion with a lifetime of 15 - 20 frames then adds it to system
+			Particle* newParticle = new Particle(x,y,new_dx,new_dy,(15 + rand() % 5),MovementType::STREAMER);
+			ParticleSystem.addParticle(newParticle);
+		}
+	}
 	
 
 };
