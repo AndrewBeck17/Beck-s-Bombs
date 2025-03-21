@@ -34,7 +34,7 @@ class ParticleSystem {
             Cell* prev = nullptr;
             while (curr != nullptr) {
                 auto [rows,cols] = get_terminal_size();
-				curr->particle.physics();	
+				curr->particle.physics(*this);	
                 if (curr->particle.x < 0) {
                     Cell* temp = curr;
                     curr = curr->next;

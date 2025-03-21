@@ -8,13 +8,14 @@
 #pragma once
 #include "/public/colors.h"
 #include "particleGraphic.h"
-#include "ParticleSystem.h"
+//#include "ParticleSystem.h"
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
 #include <cmath>
 
-//fixed some typos
+class ParticleSystem; //forward declaration (circular dependencies)
+
 enum class MovementType { STREAMER, BALLISTIC, FIREWORK };
 
 struct Particle {
@@ -32,22 +33,22 @@ struct Particle {
     }
 
     //updates position per unit lifetime to particle type {STREAMER, BALLISTIC, FIREWORK}
-    void physics() {
+    void physics(ParticleSystem& system) {
         switch(type) {
             case MovementType::STREAMER:
                 x = x + dx;
-                y = y + dy;
+                y = y - dy;
                 break;
             case MovementType::BALLISTIC:
                 x = x + dx;
-                y = y + dy;
-                dy = dy - 1;
+                y = y - dy;
+                dy = dy - 0.25;
                 break;
             case MovementType::FIREWORK:
                 x = x + dx;
-                y = y + dy;
-                if (lifetime == 0) {
-					explode();
+                y = y - dy;
+                if (lifetime == 20) {
+					explode(system);
                 }
                 break;
         }
@@ -61,9 +62,9 @@ struct Particle {
 	}
 
     //stubbed out explode function
-	void explode(){
-		if (MovementType != MovementType::FIREWORK || lifetime > 0) { //safeguard
-			return 
+	void explode(ParticleSystem& system); /*{
+		if (type != MovementType::FIREWORK || lifetime > 0) { //safeguard
+			return; 
 		}
 		srand(time(0));
 		int numParticles = 15 + (rand() % 15); //generates between 15 - 30 new particles in explosion
@@ -72,8 +73,8 @@ struct Particle {
 		double accumulated_angle = 0; //tracks how far around circle we have been
 		for (int i = 0; i < numParticles; i++) {
 			//uses trig functions to choose direction of particle
-			static_cast<int> new_dx = std::round(cos(angle_per + accumulated_angle) * velocity);
-			static_cast<int> new_dy = std::round(sin(angle_per + accumulated_angle) * velocity);
+			int new_dx = std::round(cos(angle_per + accumulated_angle) * velocity);
+			int new_dy = std::round(sin(angle_per + accumulated_angle) * velocity);
 
 			accumulated_angle += angle_per; //adds to accumulated
 
@@ -81,7 +82,7 @@ struct Particle {
 			Particle* newParticle = new Particle(x,y,new_dx,new_dy,(15 + rand() % 5),MovementType::STREAMER);
 			ParticleSystem.addParticle(newParticle);
 		}
-	}
+	}*/
 	
 
 };
