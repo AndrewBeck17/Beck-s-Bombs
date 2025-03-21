@@ -11,7 +11,7 @@
   Look at the demo code in /public/particle_demo for how to draw a point.*/
 
 //Andrew Beck
-
+#pragma once
 #include "/public/colors.h"
 
 /*
