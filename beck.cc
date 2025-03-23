@@ -11,8 +11,9 @@
 
 
 
-void becks_bomb(int frames) { //determines how many frames the function will be ran for
+void becks_bomb() { //determines how many frames the function will be ran for
 	srand(time(0));
+	int frames = 100;
 	ParticleSystem ps;
 	clearscreen();
 	show_cursor(false);

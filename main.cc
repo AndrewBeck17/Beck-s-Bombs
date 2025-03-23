@@ -8,7 +8,6 @@
 using namespace std;
 
 int main() {
-	int lifetime = 100;
 	int choice = 0;
 
 	cout << "Pick and Option (1 or 2): " << endl;
@@ -16,8 +15,8 @@ int main() {
 	cout << "2. Andrew Beck " << endl;
 	cin >> choice;
 	if (!cin) die();
-	if (choice == 1) tenjis_function(lifetime);//runs tenjis .cc function
-	else if (choice == 2) becks_bomb(lifetime); //runs andrews .cc function
+	if (choice == 1) tenjis_function();//runs tenjis .cc function
+	else if (choice == 2) becks_bomb(); //runs andrews .cc function
 	else {
 		cout << "Input Needs to be 1 or 2!" << endl;
 		die(); //handles problematic inputs
