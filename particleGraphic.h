@@ -14,12 +14,6 @@
 #pragma once
 #include "/public/colors.h"
 
-/*
-void die (const string &s = "BAD INPUT!") {
-	return s;
-}
-   */
-
 void die() {
 	exit(EXIT_FAILURE);
 }

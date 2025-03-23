@@ -42,12 +42,12 @@ struct Particle {
             case MovementType::BALLISTIC:
                 x = x + dx;
                 y = y - dy;
-                dy = dy - 0.25;
+                dy = dy - 0.25; //simulates gravity by subtracting 0.25 y velocity every frame
                 break;
             case MovementType::FIREWORK:
                 x = x + dx;
                 y = y - dy;
-                if (lifetime == 20) {
+                if (lifetime == 20) { //at lifetime 20, the firework explodes
 					explode(system);
                 }
                 break;
@@ -61,7 +61,8 @@ struct Particle {
 		point.drawPoint(x,y,look);
 	}
 
-    //stubbed out explode function
+    
+	//moved to main for circular inclusion reasons
 	void explode(ParticleSystem& system); /*{
 		if (type != MovementType::FIREWORK || lifetime > 0) { //safeguard
 			return; 
