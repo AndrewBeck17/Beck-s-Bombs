@@ -62,28 +62,6 @@ struct Particle {
 	}
 
     
-	//moved to main for circular inclusion reasons
-	void explode(ParticleSystem& system); /*{
-		if (type != MovementType::FIREWORK || lifetime > 0) { //safeguard
-			return; 
-		}
-		srand(time(0));
-		int numParticles = 15 + (rand() % 15); //generates between 15 - 30 new particles in explosion
-		int velocity = (rand() % 2) + 4; //chooses generalized velocity for both x and y direction
-		double angle_per = numParticles / 360; //angle between each particle around eplosion radius
-		double accumulated_angle = 0; //tracks how far around circle we have been
-		for (int i = 0; i < numParticles; i++) {
-			//uses trig functions to choose direction of particle
-			int new_dx = std::round(cos(angle_per + accumulated_angle) * velocity);
-			int new_dy = std::round(sin(angle_per + accumulated_angle) * velocity);
-
-			accumulated_angle += angle_per; //adds to accumulated
-
-			//creates new particle for explosion with a lifetime of 15 - 20 frames then adds it to system
-			Particle* newParticle = new Particle(x,y,new_dx,new_dy,(15 + rand() % 5),MovementType::STREAMER);
-			ParticleSystem.addParticle(newParticle);
-		}
-	}*/
-	
-
+	//moved to its own file for circular inclusion issues
+	void explode(ParticleSystem& system);
 };

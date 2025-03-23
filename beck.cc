@@ -11,25 +11,53 @@
 
 
 
-void becks_bomb() { //determines how many frames the function will be ran for
-	srand(time(0));
+void becks_bomb() {
 	int frames = 100;
-	ParticleSystem ps;
+	ParticleSystem bombcase, b, o, m;
 	clearscreen();
 	show_cursor(false);
 
 
-	
-	ps.addParticle(Particle(0,20,1,0,frames - 30,MovementType::FIREWORK));
-	ps.addParticle(Particle(0,20,1,0,frames - 30,MovementType::FIREWORK));
-	ps.addParticle(Particle(0,20,1,0,frames - 30,MovementType::FIREWORK));
-	ps.addParticle(Particle(0,20,1,0,frames - 30,MovementType::FIREWORK));
-	ps.addParticle(Particle(0,20,1,0,frames - 30,MovementType::FIREWORK));
+	//bomb casing particles
+	bombcase.addParticle(Particle(50, 0, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(50, 1, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(50, 1, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(50, 2, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(50, 3, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(50, 4, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(52, 0, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(52, 1, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(52, 2, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(52, 3, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(52, 4, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(51, 0, 0, -1, frames - 30, MovementType::STREAMER));
+	bombcase.addParticle(Particle(51, 4, 0, -1, frames - 30, MovementType::STREAMER));
+	//bomb particles	
+	b.addParticle(Particle(51, 1, 0, -1, frames - 30, MovementType::FIREWORK));
+	b.addParticle(Particle(51, 1, 0, -1, frames - 30, MovementType::FIREWORK));
+	b.addParticle(Particle(51, 1, 0, -1, frames - 30, MovementType::FIREWORK));
+	b.addParticle(Particle(51, 1, 0, -1, frames - 30, MovementType::FIREWORK));
+	b.addParticle(Particle(51, 1, 0, -1, frames - 30, MovementType::FIREWORK));
+	o.addParticle(Particle(51, 2, 0, -1, frames - 30, MovementType::FIREWORK));
+	o.addParticle(Particle(51, 2, 0, -1, frames - 30, MovementType::FIREWORK));
+	o.addParticle(Particle(51, 2, 0, -1, frames - 30, MovementType::FIREWORK));
+	o.addParticle(Particle(51, 2, 0, -1, frames - 30, MovementType::FIREWORK));
+	o.addParticle(Particle(51, 2, 0, -1, frames - 30, MovementType::FIREWORK));
+	m.addParticle(Particle(51, 3, 0, -1, frames - 30, MovementType::FIREWORK));
+	m.addParticle(Particle(51, 3, 0, -1, frames - 30, MovementType::FIREWORK));
+	m.addParticle(Particle(51, 3, 0, -1, frames - 30, MovementType::FIREWORK));
+	m.addParticle(Particle(51, 3, 0, -1, frames - 30, MovementType::FIREWORK));
+	m.addParticle(Particle(51, 3, 0, -1, frames - 30, MovementType::FIREWORK));
 
 	for (int j = 0; j < frames; j++) {
-		ps.updateDrawParticle();
-		ps.drawParticles();
-		cout << endl;
+		bombcase.updateDrawParticle();
+		bombcase.drawParticles('I',255,255,255,0,0,0);
+		b.updateDrawParticle();
+		b.drawParticles('B',255,255,255,0,0,0);
+		o.updateDrawParticle();
+		o.drawParticles('O',255,255,255,0,0,0);
+		m.updateDrawParticle();
+		m.drawParticles('M',255,255,255,0,0,0);
 	}
 
 

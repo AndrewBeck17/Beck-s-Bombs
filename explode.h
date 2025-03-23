@@ -8,12 +8,12 @@ void Particle::explode(ParticleSystem& system) {
 		return; 
 	}
 	int numParticles = 5 + (rand() % 6); //generates between 5-10 new particles in explosion
-	int velocity = (rand() % 3) + 1; //chooses generalized velocity (1-3) for both x and y direction
+	int velocity = (rand() % 3) + 1; //gives all particles a generalized velocity of (1-3) between both x and y directions
 	float angle_per = 360.0 / numParticles; //angle between each particle around explosion radius
 	float accumulated_angle = 0; //tracks how far around circle we have been
 	for (int i = 0; i < numParticles; i++) {
 		//uses trig functions to choose direction of particle
-		float new_dx = cos(angle_per + accumulated_angle) * velocity;
+		float new_dx = cos(angle_per + accumulated_angle) * velocity; 
 		float new_dy = sin(angle_per + accumulated_angle) * velocity;
 
 		accumulated_angle += angle_per; //adds to accumulated

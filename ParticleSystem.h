@@ -99,11 +99,14 @@ class ParticleSystem {
             }
         }
 
-        void drawParticles() {
+		//changed function to allow inputs for particle look, particle color, and particle background color -- Andrew
+        void drawParticles(char look = 'O',int r = 255, int g = 255, int b = 255, int bgr = 0, int bgg = 0, int bgb = 0) {
             Cell* curr = head;
             while (curr != nullptr) {
                 movecursor(curr->particle.y, curr->particle.x);
-                cout << "O";
+				setcolor(r,g,b);
+				setbgcolor(bgr,bgg,bgb);
+                cout << look;
                 cout.flush();
                 usleep(1'000'000 / 120);
                 if (curr->next == nullptr) clearscreen();
